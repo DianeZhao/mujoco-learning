@@ -7,7 +7,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     python3.10 python3.10-venv python3-pip \
+    python3.10-tk \
     git curl build-essential \
+    libgl1-mesa-glx libgl1-mesa-dri libglfw3 libx11-6 \
     && rm -rf /var/lib/apt/lists/*
 
 # Use python3.10 as default python
