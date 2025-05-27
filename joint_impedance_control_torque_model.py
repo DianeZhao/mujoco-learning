@@ -90,7 +90,7 @@ class Test(mujoco_viewer.CustomViewer):
                 plt.tight_layout()
                 plt.show()
 
-test = Test("./model/trs_so_arm100/scene.xml")
-#test = Test("./model/trs_so_arm100/scene_torque.xml")
+# test = Test("./model/trs_so_arm100/scene.xml")
+test = Test("./model/trs_so_arm100/scene_torque.xml")
 test.run_loop()
 
