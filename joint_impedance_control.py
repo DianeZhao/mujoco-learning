@@ -1,6 +1,8 @@
 import mujoco
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')
 import time
 import mujoco_viewer
 
@@ -13,6 +15,10 @@ class Test(mujoco_viewer.CustomViewer):
         # 阻抗控制参数
         self.Kp = np.diag([10] * self.model.nu)  # 刚度矩阵
         self.Kd = np.diag([10] * self.model.nu)  # 阻尼矩阵
+        
+        #You can also try this one, it cannot compensate the gravity sufficiently 
+        # self.Kp = np.diag([1] * self.model.nu)  # 刚度矩阵
+        # self.Kd = np.diag([1] * self.model.nu)  # 阻尼矩阵
 
         # 目标关节角度
         # self.q_desired = np.zeros(self.model.nu)
@@ -42,7 +48,7 @@ class Test(mujoco_viewer.CustomViewer):
         # 设置控制输入
         self.data.ctrl[:] = torque
 
-        if False:
+        if False: #True,  just for plotting
             self.q_history[self.index] = q
             self.qdot_history[self.index] = qdot
             self.torque_history[self.index] = torque
