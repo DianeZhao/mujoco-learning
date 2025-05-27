@@ -1,6 +1,7 @@
 import mujoco_viewer
 import numpy as np
-# matplotlib.use('TkAgg')
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import time,math
 
@@ -18,7 +19,7 @@ class Test(mujoco_viewer.CustomViewer):
         if True:
             self.time_history.append(self.data.time)
             self.torque_history.append(self.data.qfrc_actuator.copy())  # 存储关节力矩
-            if len(self.torque_history) > 20000:
+            if len(self.torque_history) > 200:#NOTE: inefficient honestly
                 torque_history = np.array(self.torque_history)
                 # 绘制关节力矩曲线
                 plt.figure(figsize=(10, 6))
@@ -31,7 +32,9 @@ class Test(mujoco_viewer.CustomViewer):
                     plt.legend()
                     plt.grid(True)
                 # plt.tight_layout()
+                plt.tight_layout()
                 plt.show()
+                plt.close('all')
 
 if __name__ == "__main__":
     test = Test("model/trs_so_arm100/scene.xml")

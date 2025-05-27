@@ -29,8 +29,13 @@ class CustomViewer:
         self.runBefore()
         while self.is_running():
             mujoco.mj_forward(self.model, self.data)
+            # When you manually change state (like setting data.qpos[:] = ...) and want the system to update derived values.
+            # Before reading sensor outputs or torques without stepping. i.e. data.blahblah
+            # For visualizing static poses or doing inverse kinematics.
             self.runFunc()
             mujoco.mj_step(self.model, self.data)
+            #When you want to simulate physics forward in time.
+            #This is what you use in your simulation loop for real-time or batch simulation.
             self.sync()
     
     def runBefore(self):
